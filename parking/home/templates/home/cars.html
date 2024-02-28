@@ -1,0 +1,63 @@
+{% extends "home/base.html" %}
+
+
+{% block start%}
+    {% include "home/nav.html" %}  
+    {% if messages %}
+            
+            {% for message in messages %}
+            <ul class="messages"></ul>
+                <div class="alert alert-danger" role="alert">
+                    {{ message }}
+                </div> 
+            </ul>
+            {% endfor %}
+            
+        {% endif %}
+    <div class="container" style="margin: 5em;">
+        <div id="add-car" style="margin: 5em;">
+            <form class="col-6 mx-auto card p-3 shadow-lg" method="post" enctype="multipart/form-data">
+                <!-- enctype="multipart/form-data"  we use this to send data to backend--> 
+                {% csrf_token %}
+        
+                <h2>Add Car</h2>
+                <hr>
+        
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Car's Name</label>
+                    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="name">
+                </div>
+        
+                <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label">Car's Number</label>
+                    <input type="text" class="form-control" id="exampleInputPassword1" name="number">
+                </div>
+    
+        
+                <button type="submit" class="btn btn-primary">Add</button>
+        
+            </form>
+        </div>
+
+        <table class="table table table-success table-striped">
+            <thead>
+                <tr>
+                  <th scope="col">No</th>
+                  <th scope="col">Car</th>
+                  <th scope="col">Number</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for car in cars %}
+                <tr>
+                  <th >{{forloop.counter}}</th>
+                  <td >{{car.car_name}}</td>
+                  <td>{{car.car_number}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+
+{% endblock %}

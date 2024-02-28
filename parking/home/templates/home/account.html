@@ -1,0 +1,59 @@
+{% extends "home/base.html" %}
+
+
+{% block start%}
+    {% include "home/nav.html" %}  
+
+    <!-- {{ request.user }}
+    {{ request.user.username }}
+    {{ request.user.balance }} -->
+    
+    <!-- <div class="account">
+         <div id="account">
+            <h1 id="balance">Rs. 500</h1>
+            <div id="add">
+                <form>
+                    <h1>Add Money</h1>
+                    <h2>Chose your payment type</h2>
+
+                    <label for="net">Net</label>
+                    <input type="radio" name="pay" id="net">
+
+                    <label for="upi">UPI</label>
+                    <input type="radio" name="pay" id="upi">
+
+                    <br>
+                    <input type="submit" value="ADD">
+                </form>
+            </div>
+        </div>
+    </div> -->
+    <div class="container mt-5" style="margin: 5em auto 0; width: 50%;">
+        <div class="card" style="text-align: center;">
+            <div class="card-body">
+                <div class="row mb-4" style="background : linear-gradient(135deg,rgba(1, 11, 44, 0.901),rgba(12, 4, 73, 0.912));box-shadow: 0px 5px 5px  black;color: white;">
+                    <div class="col">
+                        <h1>Rs {{request.user.balance}}</h1>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <h2>Add Money</h2>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <form method="post">
+                            {% csrf_token %}
+                            <div class="mb-3">
+                                <label for="input" class="form-label">Enter Amount</label>
+                                <input type="text" class="form-control" id="input" name="money">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Add</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

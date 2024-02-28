@@ -1,0 +1,91 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,body{
+    height: 100%;
+    width: 100%;
+}
+
+#head{
+    /* background-color: bisque; */
+    color: white;
+    min-height: 50vh;
+    width: 100%;
+    background: linear-gradient(135deg,rgba(0, 0, 0, 0.895),rgba(6, 2, 35, 0.912)),url("/static/images/bg2.jpg");
+    background-repeat: no-repeat;
+    background-position: left;
+    background-size: cover;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+}
+
+/* #hleft{
+    border: 3px solid green;
+} */
+#hleft{
+    width: 40%;
+    font-size: 5rem;
+}
+/* #hright{
+    border: 5px solid red;
+} */
+#hright h1,#hright h2{
+    margin-bottom: 0.3em;
+}
+
+
+
+/* #account{
+    background: linear-gradient(135deg,rgba(1, 11, 44, 0.883),rgba(12, 4, 73, 0.826));
+    background-color: rgba(43, 43, 95, 0.601);
+    padding: 2em;
+    width: 30%;
+    min-height: 700px;
+    position: fixed;
+    right: 0;
+    text-align: center;
+    color: white;
+
+} */
+/* #account #balance{
+    background : linear-gradient(135deg,rgba(1, 11, 44, 0.901),rgba(12, 4, 73, 0.912));
+    box-shadow: 0px 5px 5px  black;
+} */
+
+/* #account #add{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+} */
+
+/* #account #add h1,#account #add h2{
+    margin-bottom: 0.3em;
+} */
+/* #account #add input[type="submit"]{
+    margin-top: 0.5em;
+    cursor: pointer;
+    padding: 0.5em 1em;
+    border: none;
+    outline: none;
+    border-radius: 20%;
+    
+} */
+
+
+
+
+
+
+#history{
+    padding: 1.5em;
+    background-color: rgba(62, 62, 110, 0.463);
+    width: 100%;
+    /* margin: 2em auto 0; */
+    /* min-height: 100vh; */
+    
+}
