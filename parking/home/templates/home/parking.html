@@ -1,0 +1,88 @@
+{% extends "home/base.html" %}
+
+
+{% block start %}
+    
+    <!-- <button class="btn btn-primary" style="position: absolute;z-index: 5;top: 0;right: 7em;opacity: 0.8;"><a href="/logout" class="btn btn-primary">Log out</a></button> -->
+    <main>
+        {% include "home/nav.html" %}
+        <div id="slots" style="user-select: none;">
+        <form method="get"
+            id="space" 
+            style="background: linear-gradient(rgba(0, 0, 0, 0.711),rgba(0, 0, 0, 0.711)),url('./park.jpg');
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+            width: 70%;
+            min-width: 350px;
+            margin: 3em auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1em;
+            flex-wrap: wrap;">
+
+            <div class="box occupied" 
+            style=" width: 45%;
+                    display: block;
+                    margin: 2em 0;
+                    height: 5em;">
+                <button type="submit"
+                style=" background-color: green;
+                        width: 100%;
+                        height: 100%;
+                        outline: none;
+                        border: none;
+                        text-align: center;
+                        color: white;">1</button>
+            </div>
+                
+            <div class="box occupied" 
+            style=" width: 45%;
+                    display: block;
+                    margin: 2em 0;
+                    height: 5em;">
+                <button type="submit"
+                style=" background-color: green;
+                        width: 100%;
+                        height: 100%;
+                        outline: none;
+                        border: none;
+                        text-align: center;
+                        color: white;">2</button>
+            </div>
+
+            <div class="box occupied"
+            style=" width: 45%;
+                    display: block;
+                    margin: 2em 0;
+                    height: 5em;">
+                <button type="submit" value="3" 
+                style=" background-color: green;
+                        width: 100%;
+                        height: 100%;
+                        outline: none;
+                        border: none;
+                        text-align: center;
+                        color: white;">3</button>
+            </div>
+
+            <div class="box occupied"
+            style=" width: 45%;
+                    display: block;
+                    margin: 2em 0;
+                    height: 5em;">
+                <button type="submit" value="4"
+                style=" background-color: green;
+                        width: 100%;
+                        height: 100%;
+                        outline: none;
+                        border: none;
+                        text-align: center;
+                        color: white;">4</button>
+            </div>
+        </form>
+        </div>
+    </main>
+
+{% endblock %}

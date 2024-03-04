@@ -81,7 +81,7 @@ def cars(request):
         car = Cars.objects.filter(car_number = car_number)
         slot = Slots.objects.all()[0]
         # print(slot)
-        if slot.total_slot==slot.parked:
+        if slot.total_slot==slot.booked_slot:
             messages.add_message(request, messages.INFO, "No Slot Available")
             return redirect('/cars')
         if car.exists():
@@ -89,7 +89,7 @@ def cars(request):
             return redirect('/cars')
 
 
-        slot.parked = slot.parked+1
+        slot.booked_slot = slot.booked_slot+1
         slot.save()
         # print(slot.parked)
         car = Cars.objects.create(
@@ -112,3 +112,7 @@ def account(request):
         request.user.save()
         return redirect('/account')
     return render(request,'home/account.html',{'title':"account"})
+
+
+def parking(request):
+    return render(request,'home/parking.html')
