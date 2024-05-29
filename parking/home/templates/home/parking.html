@@ -7,7 +7,7 @@
     <main>
         {% include "home/nav.html" %}
         <div id="slots" style="user-select: none;">
-        <form method="get"
+        <form method="get" 
             id="space" 
             style="background: linear-gradient(rgba(0, 0, 0, 0.711),rgba(0, 0, 0, 0.711)),url('./park.jpg');
             background-position: center;
@@ -22,67 +22,111 @@
             padding: 1em;
             flex-wrap: wrap;">
 
-            <div class="box occupied" 
+            {% for spot in spots %}
+                    <div class="box occupied" 
+                style=" width: 45%;
+                        display: block;
+                        margin: 2em 0;
+                        height: 5em;">
+                    <button type="submit" name = "button" value={{forloop.counter}} id="1"
+                        {% if spot.available %}
+                            style= " background-color: rgb(69, 202, 69);
+                                    width: 100%;
+                                    height: 100%;
+                                    outline: none;
+                                    border: none;
+                                    text-align: center;
+                                    color: white;"
+                        {% else %}
+                            style= " background-color: rgb(190, 16, 16);
+                                    width: 100%;
+                                    height: 100%;
+                                    outline: none;
+                                    border: none;
+                                    text-align: center;
+                                    color: white;"
+                        {% endif %}>
+                    {{forloop.counter}}</button>
+                </div>
+            {% endfor %}
+
+            <!-- <div class="box occupied" 
             style=" width: 45%;
                     display: block;
                     margin: 2em 0;
                     height: 5em;">
-                <button type="submit"
-                style=" background-color: green;
+                <button type="submit" value="1" id="1"
+                style=" background-color: rgb(104, 175, 104);
                         width: 100%;
                         height: 100%;
                         outline: none;
                         border: none;
                         text-align: center;
                         color: white;">1</button>
-            </div>
+            </div> -->
                 
-            <div class="box occupied" 
+            <!-- <div class="box occupied" 
             style=" width: 45%;
                     display: block;
                     margin: 2em 0;
                     height: 5em;">
-                <button type="submit"
-                style=" background-color: green;
+                <button type="submit" value="2" id="2"
+                style=" background-color: rgb(104, 175, 104);
                         width: 100%;
                         height: 100%;
                         outline: none;
                         border: none;
                         text-align: center;
                         color: white;">2</button>
-            </div>
+            </div> -->
 
-            <div class="box occupied"
+            <!-- <div class="box occupied"
             style=" width: 45%;
                     display: block;
                     margin: 2em 0;
                     height: 5em;">
-                <button type="submit" value="3" 
-                style=" background-color: green;
+                <button type="submit" value="3" id="3"
+                style=" background-color: rgb(104, 175, 104);
                         width: 100%;
                         height: 100%;
                         outline: none;
                         border: none;
                         text-align: center;
                         color: white;">3</button>
-            </div>
+            </div> -->
 
-            <div class="box occupied"
+            <!-- <div class="box occupied"
             style=" width: 45%;
                     display: block;
                     margin: 2em 0;
                     height: 5em;">
-                <button type="submit" value="4"
-                style=" background-color: green;
+                <button type="submit" value="4" id="4" 
+                style=" background-color: rgb(158, 53, 39);
                         width: 100%;
                         height: 100%;
                         outline: none;
                         border: none;
                         text-align: center;
                         color: white;">4</button>
-            </div>
+            </div> -->
+
         </form>
         </div>
     </main>
+
+    <!-- <script>
+        const f = document.getElementById('space');
+        f.addEventListener("submit",function(e){
+            e.preventDefault();
+            if(e.submitter.style.backgroundColor==="rgb(158, 53, 39)")
+            {
+                e.submitter.innerHTML += "</br>already booked";
+            }
+            else
+            {
+                e.submitter.style.backgroundColor = "rgb(158, 53, 39)";
+            }
+        })
+    </script> -->
 
 {% endblock %}

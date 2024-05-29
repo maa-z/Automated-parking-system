@@ -1,0 +1,16 @@
+/{% extends "home/base.html" %}
+
+
+{% block start%}
+    {% include "home/nav.html" %}  
+
+    <div class="container mt-5 pt-5">
+        <div class="text-center">
+            <h1>{{money}}</h1>
+            <a href="/" class="btn btn-success">pay now</a>
+            <!-- <a href="/" class="btn ">cancel</a> -->
+        </div>
+    </div>
+
+   
+{% endblock %}

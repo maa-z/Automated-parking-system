@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-4fr2cg)t!m-8==ep612__5up=0g0&+yxt-981dce_ni(w)z@=e
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['192.168.83.97','localhost']
 
 
 # Application definition
@@ -136,5 +136,13 @@ STATICFILES_DIRS = [
 AUTH_USER_MODEL = 'home.CustomUser'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+
+API_KEY = "c00a7e4562196ccb72dbced6f35764d0"
+
+AUTH_TOKEN = "1aa9debaf1b4b66c50523823e472a1b1"
+
+SALT = "d0ef0ca25fd9440abeb5bf27f4bda275"
 
 

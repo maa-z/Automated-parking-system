@@ -27,4 +27,8 @@ urlpatterns = [
     path('cars/',cars,name='cars'),
     path('account/',account,name='account'),
     path('parking/',parking,name='parking'),
+    path('find/<int:id>',entry_exit,name="entry_exit"),
+    #  entry/<int>
+    path('data', receive_data, name='receive_data'),
+    path('account/money/<int:amount>', money, name='money'),
 ]
