@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-4fr2cg)t!m-8==ep612__5up=0g0&+yxt-981dce_ni(w)z@=e
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.83.97','localhost']
+ALLOWED_HOSTS = ['*','192.168.83.97','localhost','192.168.181.61','192.168.181.46']
 
 
 # Application definition
@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 ]
 
-EXTERNAL_APPS = ['home']
+EXTERNAL_APPS = ['home','rest_framework',]
 
 INSTALLED_APPS += EXTERNAL_APPS
 

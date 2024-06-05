@@ -189,6 +189,7 @@ import json
 
 @csrf_exempt
 def receive_data(request):
+    print("api called")
     if request.method == 'POST':
         try:
             # print("hello")
