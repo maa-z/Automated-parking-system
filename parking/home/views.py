@@ -157,7 +157,26 @@ def money(request,amount):
 def parking(request):
 
     if 'button' in request.GET:
-        button_clicked = request.GET['button']
+        button_clicked = str(request.GET['button'])
+        spot_choosen = Spots.objects.filter(name=button_clicked)[0]
+        if spot_choosen.available: # choose a spot (add entry time , available false , user user)
+            print("spot_choosen")
+            spot_choosen.entry = timezone.now()
+            spot_choosen.available = False
+            spot_choosen.user = request.user
+            spot_choosen.save()
+
+            slot = Slots.objects.all()[0]
+            slot.booked_slot = slot.booked_slot+1
+            print(slot.booked_slot)
+            slot.save()
+
+            messages.add_message(request, messages.INFO, "You booked this slot")
+            return redirect("/parking")
+        else:
+            # messages.add_message(request, messages.INFO, "slot not Available")
+            messages.warning(request, "Slot not Available")
+            return redirect("/parking")
 
         # spot = Spots.objects.filter(id=button_clicked)[0]
         
@@ -194,8 +213,10 @@ def receive_data(request):
         try:
             # print("hello")
             data = json.loads(request.body)
-            # print(data)
-            data = int(data['car_no'])
+            print(f"car id {data['card_id']}")
+            print(f"car id type{type(data['card_id'])}")
+            # data = int(data['car_no'])
+            data = data['car_no']
             car = Cars.objects.filter(car_number=data)
             if len(car): # car is registered 
                 print("car registerd")
@@ -224,11 +245,17 @@ def receive_data(request):
                     spot.car = None 
                     spot.entry = None 
                     spot.available = True 
+                    spot.user = None
                     spot.save()
+                    
 
                     slot = Slots.objects.all()[0]
                     slot.booked_slot = slot.booked_slot-1
                     slot.save()
+
+                    status = True
+                    spot_name = "0"
+                    process = "EXIT"
 
                 else: ## entry
                     print("entery")
@@ -238,25 +265,63 @@ def receive_data(request):
                         print("have balance")
                         ## check slot  is empty 
                         slot = Slots.objects.all()[0]
-                        if slot.total_slot > slot.booked_slot: # slot empty 
+                        spots = Spots.objects.filter(car=None, available=False,user=car.user)
+                        if slot.total_slot > slot.booked_slot or len(spots): # slot empty (could be slot is full but prebooked)
                             print("slot available")
-                            ## any empty spot 
-                            slot.booked_slot = slot.booked_slot+1
-                            slot.save()
 
-                            spot_empty = Spots.objects.filter(car=None)[0]
-                            spot_empty.car = car 
-                            spot_empty.available = False
-                            spot_empty.entry = timezone.now()
-                            spot_empty.save()
+                            ## any empty spot 
+                            # if not len(spots):
+                            #     slot.booked_slot = slot.booked_slot+1
+                            #     slot.save()
+
+                            # spot_empty = Spots.objects.filter(car=None)[0]
+
+                            # prebooked or not
+                            # spots = Spots.objects.filter(car__isnull=True, available=True,user=car.user)
+                            if len(spots):# prebooked same user
+                                print("assigning to prebooked user")
+                                spot = spots[0]
+                                spot.car = car 
+                                spot.save()
+
+                                status = True
+                                spot_name = spot.name 
+                                process = "ENTER"
+
+                            else: # not prebooked
+                                print("assingning to not prebook user")
+                                slot.booked_slot = slot.booked_slot+1
+                                slot.save()
+                                spot_empty = Spots.objects.filter(available = True)[0] 
+                                spot_empty.car = car 
+                                spot_empty.available = False
+                                spot_empty.entry = timezone.now()
+                                spot_empty.save()
+                                
+                                status = True
+                                spot_name = spot_empty.name
+                                process = "ENTER"
+
+                            # status = True
+                            # spot_name = spot_empty.name
+                            # process = "ENTER"
+                            
 
                             # return redirect('/')
                         else: # slot not empty
-                            pass
+                            status = False
+                            spot_name = "0"
+                            process = "not empty slot"
+                            # pass
                     else:# no balance 
-                        pass
+                        status = False
+                        spot_name = "0"
+                        process = "no balance"
+
             else: # not registerd car
-                pass
+                status = False
+                spot_name = "0"
+                process = "car not registered"
 
             # Process the data
             # For example, access data fields like this:
@@ -265,14 +330,15 @@ def receive_data(request):
             # Perform operations with the data
 
             response = {
-                'status': True,
-                
+                'status': status,
+                'spot_name' : spot_name,
+                'process' : process,
                 'message': 'Data received successfully test',
                 # 'data': data  # Optional: echo received data back in response
             }
             return JsonResponse(response, status=200)
 
         except json.JSONDecodeError:
-            return JsonResponse({'status': False, 'message': 'Invalid JSON test'}, status=400)
+            return JsonResponse({'status': False, 'spot_name':-2,'process':None ,'message': 'Invalid JSON test'}, status=400)
     else:
-        return JsonResponse({'status': False, 'message': 'Invalid request method test'}, status=405)
+        return JsonResponse({'status': False,'spot_name':-1,'process':None ,'message': 'Invalid request method test'}, status=405)

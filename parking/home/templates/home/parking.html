@@ -6,6 +6,23 @@
     <!-- <button class="btn btn-primary" style="position: absolute;z-index: 5;top: 0;right: 7em;opacity: 0.8;"><a href="/logout" class="btn btn-primary">Log out</a></button> -->
     <main>
         {% include "home/nav.html" %}
+
+
+        {% if messages %}
+            
+        {% for message in messages %}
+        <ul class="messages"></ul>
+            <div class="alert alert-success" role="alert">
+                {{ message }}
+            </div> 
+        </ul>
+        {% endfor %}
+        
+        {% endif %}
+
+
+
+
         <div id="slots" style="user-select: none;">
         <form method="get" 
             id="space" 

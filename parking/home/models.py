@@ -32,6 +32,7 @@ class Slots(models.Model):
     booked_slot = models.IntegerField()
 
 class Spots(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete = models.SET_NULL, null=True, blank=True)
     car = models.ForeignKey(Cars,on_delete=models.SET_NULL,null=True,blank=True)
     name = models.CharField(max_length=100)
     available = models.BooleanField()
