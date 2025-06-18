@@ -20,15 +20,22 @@ from home.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+
     path('',home,name='home'),
+
     path('login/',login_page,name='login_page'),
-    path('register/',register,name='register'),
+    path('register/',register,name='register'), # 500
     path('logout/',logout_page,name='logout'),
-    path('cars/',cars,name='cars'),
-    path('account/',account,name='account'),
+
+    path('cars/',cars,name='cars'), # wb9393 honda
+
+    path('account/',account,name='account'), # money and cars registerd
+
     path('parking/',parking,name='parking'),
-    path('find/<int:id>',entry_exit,name="entry_exit"),
+
+    # path('find/<int:id>',entry_exit,name="entry_exit"),
     #  entry/<int>
-    path('data', receive_data, name='receive_data'),
-    path('account/money/<int:amount>', money, name='money'),
+    path('data', receive_data, name='receive_data'),  # localhost:2732.3434/data
+
+    path('account/money/<int:amount>', money, name='money'),  # 
 ]

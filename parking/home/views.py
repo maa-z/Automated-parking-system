@@ -150,7 +150,7 @@ def money(request,amount):
 
 
 
-
+################  route for parking availablity image page
 
 
 @login_required(login_url="/login/")
@@ -194,8 +194,8 @@ def parking(request):
 
 
 
-def entry_exit(request,id):
-    return HttpResponse(f"hello {id}")
+# def entry_exit(request,id):
+#     return HttpResponse(f"hello {id}")
 
 
 
@@ -205,7 +205,7 @@ from django.views.decorators.csrf import csrf_exempt
 import json
 
 
-
+####################     api for iot 
 @csrf_exempt
 def receive_data(request):
     print("api called")
@@ -221,6 +221,7 @@ def receive_data(request):
             if len(car): # car is registered 
                 print("car registerd")
                 car = car[0]
+
                 spot = Spots.objects.filter(car=car)
                 if len(spot): ## exit
                     print("exit")
@@ -261,10 +262,13 @@ def receive_data(request):
                     print("entery")
                     ## check user have balance
                     balance = car.user.balance
+                    
                     if balance>0:
                         print("have balance")
                         ## check slot  is empty 
                         slot = Slots.objects.all()[0]
+                        
+                        # car nhi hai , available nhi nhi , user muzammil hai
                         spots = Spots.objects.filter(car=None, available=False,user=car.user)
                         if slot.total_slot > slot.booked_slot or len(spots): # slot empty (could be slot is full but prebooked)
                             print("slot available")
